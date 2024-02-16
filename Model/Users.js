@@ -1,11 +1,11 @@
-import { Connection as db } from "../config/index.js";
+import { connection as db } from "../config/config.js";
 import { hash, compare } from "bcrypt";
 import { createToken } from "../Middleware/AuthenticateUser.js";
 
 class Users{
     fetchUsers(req, res){
         const qry = `SELECT userID, firstName, lastName, userAge, gender, emailAdd, userRole
-                    FROM Users`
+                    FROM Users;`
         db.query(qry,(err, results)=>{
             if(err)throw err
             res.json({status: res.statusCode, results})
@@ -42,7 +42,8 @@ class Users{
                 // Create token
                 let token = createToken(user)
                 res.json({
-                    status: res.statusCode,
+                    status: res.statusCode, 
+                    token,
                     msg: "You are registered successfully"
                 })
             }

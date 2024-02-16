@@ -1,6 +1,7 @@
 import { createPool } from "mysql";
 import { config } from "dotenv"; 
 config();
+
 let connection = createPool({
     host: process.env.HOST,
     database: process.env.DBName,
@@ -9,3 +10,7 @@ let connection = createPool({
     multipleStatements: true,
     connectionLimit:30
 })
+
+export {
+    connection
+}

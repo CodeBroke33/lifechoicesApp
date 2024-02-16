@@ -1,4 +1,4 @@
-import { Connection as db } from '../config/config.js';
+import { connection as db } from '../config/config.js';
 
 class Products {
     fetchProducts(req, res) {
@@ -36,24 +36,7 @@ class Products {
             })
         })
     }
-    addProduct(req, res) {
-        const qry = `
-            SELECT prodID,
-            prodName,
-            prodQuantity,
-            prodAmount,
-            userID,
-            FROM Products
-            WHERE prodID = ${req.params.id};
-            `
-        db.query(qry, (err, result) => {
-            if (err) throw err
-            res.json({
-                status: res.statusCode,
-                result
-            })
-        })
-    }
+    
     addProduct(req, res) {
         const qry =`
         INSERT INTO Products 
