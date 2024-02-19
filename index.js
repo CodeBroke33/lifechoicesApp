@@ -28,7 +28,8 @@ app.use(
     cors()
 )
 app.get('^/$|/lifechoices', (req, res)=>{
-    res.status(200).sendFile(path.join( __dirname, './Static/index.html'))
+    res.end('You are home')
+    // res.status(200).sendFile(path.join( __dirname, './Static/index.html'))
 })
 app.use('/users', userRouter)
 app.use('/products', productRouter)
