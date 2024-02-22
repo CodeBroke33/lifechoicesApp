@@ -4,12 +4,10 @@ import cookieParser from "cookie-parser";
 import cors  from 'cors';
 import { errorHandling } from './Middleware/ErrorHandling.js'
 import path from 'path'
-import { config } from "dotenv";
-config()
 
 const app = express()
 const port = +process.env.PORT || 4000
-app.use((req, res)=>{
+app.use((req, res, next)=>{
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Credentials", "true");
     res.header("Access-Control-Allow-Methods", "*");
@@ -28,8 +26,7 @@ app.use(
     cors()
 )
 app.get('^/$|/lifechoices', (req, res)=>{
-    res.end('You are home')
-    // res.status(200).sendFile(path.join( __dirname, './Static/index.html'))
+    res.status(200).sendFile(path.join( __dirname, './Static/index.html'))
 })
 app.use('/users', userRouter)
 app.use('/products', productRouter)
